@@ -155,6 +155,22 @@ CATEGORIES = {
             {"brand": "Tecno", "name": "Tecno Phantom V Fold 2", "variants": ["256GB", "512GB"], "colors": ["Karst Green", "Moondust Grey"], "base_price": 89999, "sub": "Tecno Phantom"},
             {"brand": "Tecno", "name": "Tecno Camon 30 Premier", "variants": ["256GB", "512GB"], "colors": ["Lava Grey", "Dark Welkin"], "base_price": 36999, "sub": "Tecno Camon"},
             {"brand": "Tecno", "name": "Tecno Spark 20 Pro+", "variants": ["128GB", "256GB"], "colors": ["Magic Skin Green", "Magic Skin Black"], "base_price": 14999, "sub": "Tecno Spark"},
+            # Infinix
+            {"brand": "Infinix", "name": "Infinix Note 40 Pro 5G", "variants": ["256GB"], "colors": ["Vintage Green", "Titan Gold"], "base_price": 21999, "sub": "Infinix Note"},
+            {"brand": "Infinix", "name": "Infinix GT 20 Pro", "variants": ["256GB"], "colors": ["Mecha Blue", "Mecha Orange", "Mecha Silver"], "base_price": 24999, "sub": "Infinix GT"},
+            {"brand": "Infinix", "name": "Infinix Smart 8 HD", "variants": ["64GB"], "colors": ["Timber Black", "Shiny Gold", "Galaxy White"], "base_price": 6299, "sub": "Infinix Smart"},
+            # Lava (Indian Brand)
+            {"brand": "Lava", "name": "Lava Agni 3 5G", "variants": ["128GB", "256GB"], "colors": ["Heather Glass", "Pristine Glass"], "base_price": 20999, "sub": "Lava Agni"},
+            {"brand": "Lava", "name": "Lava Blaze 3 5G", "variants": ["128GB"], "colors": ["Glass Blue", "Glass Gold"], "base_price": 9999, "sub": "Lava Blaze"},
+            {"brand": "Lava", "name": "Lava Yuva 3 Pro", "variants": ["128GB"], "colors": ["Cosmos Blue", "Meadow Green", "Forest Viridian"], "base_price": 7999, "sub": "Lava Yuva"},
+            # Honor
+            {"brand": "Honor", "name": "Honor 200 Pro 5G", "variants": ["512GB"], "colors": ["Ocean Cyan", "Black"], "base_price": 57999, "sub": "Honor"},
+            {"brand": "Honor", "name": "Honor 200 5G", "variants": ["256GB", "512GB"], "colors": ["Moonlight White", "Black"], "base_price": 34999, "sub": "Honor"},
+            {"brand": "Honor", "name": "Honor X9b 5G", "variants": ["256GB"], "colors": ["Sunrise Orange", "Midnight Black"], "base_price": 25999, "sub": "Honor"},
+            # CMF (by Nothing)
+            {"brand": "CMF", "name": "CMF Phone 1", "variants": ["128GB"], "colors": ["Black", "Orange", "Light Green", "Blue"], "base_price": 15999, "sub": "CMF by Nothing"},
+            # Asus ROG Gaming Phones
+            {"brand": "ASUS", "name": "ASUS ROG Phone 8 Pro", "variants": ["512GB"], "colors": ["Phantom Black"], "base_price": 94999, "sub": "ASUS ROG Phone"},
         ],
     },
 
