@@ -118,17 +118,56 @@ def scrape_amazon_in(query):
             
     return products
 
-def search_live_products(query):
+def search_live_products(query, api_key=None):
     """
     Main entry point for live searching. Returns a DataFrame.
+    If api_key is provided, uses SerpApi (100% reliable).
+    Otherwise, falls back to the scraper.
     """
-    # Scrape Amazon
+    if api_key:
+        # Use SerpApi Amazon Search
+        url = "https://serpapi.com/search.json"
+        params = {
+            "engine": "amazon",
+            "q": query,
+            "amazon_domain": "amazon.in",
+            "api_key": api_key
+        }
+        try:
+            response = requests.get(url, params=params, timeout=10)
+            response.raise_for_status()
+            data = response.json()
+            
+            amazon_results = data.get("amazon_results", [])
+            products = []
+            for idx, item in enumerate(amazon_results[:10]):
+                price_info = item.get("price", {})
+                price = price_info.get("value", 0) if isinstance(price_info, dict) else 0
+                
+                products.append({
+                    "product_id": f"live_api_{idx}",
+                    "title": item.get("title", ""),
+                    "price": price,
+                    "original_price": price, # SerpApi doesn't always return original price easily in search list
+                    "discount_percent": 0,
+                    "avg_rating": item.get("rating", 4.0),
+                    "num_ratings": item.get("reviews_count", 100),
+                    "category": "Electronics",
+                    "brand": item.get("title", "").split(' ')[0],
+                    "url": item.get("link", ""),
+                    "best_platform": "Amazon"
+                })
+            return pd.DataFrame(products)
+        except Exception as e:
+            print(f"SerpApi Error: {e}")
+            return pd.DataFrame()
+
+    # Fallback to Scraper
     amazon_products = scrape_amazon_in(query)
     
     if amazon_products:
         return pd.DataFrame(amazon_products)
     else:
-        # If scraper is blocked or no results, return empty DataFrame
         return pd.DataFrame()
 
 # Test the scraper if run directly

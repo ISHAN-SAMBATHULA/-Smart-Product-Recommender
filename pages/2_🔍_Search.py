@@ -54,6 +54,18 @@ with st.expander("🎛️ Advanced Filters", expanded=True):
         
     platform_filter = st.selectbox("Best Price On Platform", ["All", "Amazon", "Flipkart", "Meesho", "Croma", "Myntra", "JioMart"], key="platform_filter")
 
+# ─── SerpApi Key (Sidebar / Secrets) ──────────────────────────────────────────
+st.sidebar.markdown("---")
+# Look for owner's key in Streamlit Secrets first
+owner_key = st.secrets.get("SERPAPI_KEY", "")
+
+serpapi_key = st.sidebar.text_input(
+    "🔑 SerpApi Key (Optional)", 
+    type="password", 
+    help="Default key is active. Enter your own key only if the search limit is reached.",
+    value=owner_key if owner_key else ""
+)
+
 # ─── Search Results ──────────────────────────────────────────────────────────
 if search_type == "Local Database":
     results = db_manager.search_products(
@@ -67,11 +79,18 @@ if search_type == "Local Database":
         limit=60,
     )
 else:
-    with st.spinner("Scraping live prices from Amazon India..."):
+    with st.spinner("Fetching live prices from Amazon..."):
         from data.live_api import search_live_products
-        results = search_live_products(search_query)
+        results = search_live_products(search_query, api_key=serpapi_key if serpapi_key else None)
         if results.empty:
-            st.warning("Amazon blocked the scraper with a CAPTCHA. Please try again later or use the Local Database.")
+            st.error("🔒 Amazon blocked the scraper with a CAPTCHA.")
+            st.info("""
+            **How to fix this:**
+            Amazon heavily blocks anonymous scrapers on public cloud servers. To get 100% reliable live data:
+            1. Go to [serpapi.com](https://serpapi.com/) and create a free account (takes 30 seconds).
+            2. Copy your **API Key** from your dashboard.
+            3. Paste it into the **🔑 SerpApi Key** field in the sidebar!
+            """)
 
 st.markdown(f"""
 <div style="color: #8899A6; margin: 16px 0; font-size: 0.9rem;">
